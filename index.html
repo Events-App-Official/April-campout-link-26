@@ -1,39 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join Event</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Join Event</title>
 
-  <script>
-    window.onload = () => {
-      window.location.href = "events://yourEvent/69dbc3655e932ed7fc3cc384";
+<script>
+window.onload = function () {
+  const eventId = "69dbc3655e932ed7fc3cc384";
 
-      setTimeout(() => {
-        window.location.href =
-          "https://play.google.com/store/apps/details?id=com.eventsapp.events";
-      }, 2000);
-    };
-  </script>
+  const appUrl = `events://yourEvent/${eventId}`;
+  const iosStore =
+    "https://apps.apple.com/us/app/events-the-app-for-scouts/id6748885673";
+  const androidStore =
+    "https://play.google.com/store/apps/details?id=com.eventsapp.events";
 
-  <style>
-    body {
-      margin: 0;
-      background: #0f0f0f;
-      color: white;
-      font-family: system-ui, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  // Try opening app
+  window.location = appUrl;
+
+  // Fallback after delay
+  setTimeout(function () {
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      window.location = iosStore;
+    } else if (/android/i.test(userAgent)) {
+      window.location = androidStore;
     }
-  </style>
+  }, 1500);
+};
+</script>
+
+<style>
+body {
+  margin: 0;
+  background: #0f0f0f;
+  color: white;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+</style>
 </head>
+
 <body>
-  <div>
-    <h2>Opening your event…</h2>
-    <p>If nothing happens, make sure the app is installed.</p>
-  </div>
+<div>
+<h2>Opening your event…</h2>
+<p>If nothing happens, installing the app.</p>
+</div>
 </body>
 </html>
